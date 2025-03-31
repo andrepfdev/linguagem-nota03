@@ -21,11 +21,9 @@ Cada membro do grupo foi responsável por um módulo específico:
 | Membro      | Módulo          | Tarefas                                      |
 |-------------|-----------------|---------------------------------------------|
 | Jaqueline  | `Clientes`      | Implementou `cadastrarCliente()` e `consultarCliente()` |
-| Fulano | `Produtos`      | Desenvolveu `cadastrarProduto()` e `consultarProduto()` |
-| Siclano | `Vendas`        | Criou `realizarVenda()` e `consultarVendas()`           |
+| Rivaldo | `Produtos`      | Desenvolveu `cadastrarProduto()` e `consultarProduto()` |
+| Emerson | `Vendas`        | Criou `realizarVenda()` e `consultarVendas()`           |
 | André    | `Principal`     | Integrou módulos e desenvolveu o menu (`main.c`)        |
-
-*(Substitua os nomes e tarefas conforme sua equipe!)*
 
 ---
 
@@ -38,3 +36,4 @@ Cada membro do grupo foi responsável por um módulo específico:
 1. **Compilação Direta** (recomendado):
    ```bash
    gcc main.c cliente.c produto.c venda.c -o sistema_vendas
+   ```
