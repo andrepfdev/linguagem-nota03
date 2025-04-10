@@ -1,76 +1,71 @@
 #include <stdio.h>
 #include "vendas.h"
-#include "estruturas.h"
-#include "cliente.h"
-#include "produto.h"
 
-// Função para realizar uma venda
-void realizarVenda(Venda v[], Cliente c[], Produto p[], int *numVendas) {
+void realizarVenda(Venda v[], int *numVendas, Cliente c[], Produto p[]) {
     int idCliente, idProduto, quantidade;
     
-    printf("\n==== Realizar Venda ====\n");
+    // Verifica se atingiu o limite de vendas
+    if (*numVendas >= TAMVenda) {
+        printf("\nLimite de vendas atingido!\n");
+        return;
+    }
     
-    // Solicitar ID do cliente
+    // Solicita os dados da venda
+    printf("\n--- Realizar Venda ---\n");
     printf("ID do Cliente: ");
     scanf("%d", &idCliente);
-    if (!validarCliente(c, idCliente)) {
-        printf("Cliente não encontrado!\n");
+    
+    // Verifica se o cliente existe
+    if (!clienteExiste(c, idCliente)) {
+        printf("\nCliente não encontrado!\n");
         return;
     }
     
-    // Solicitar ID do produto
     printf("ID do Produto: ");
     scanf("%d", &idProduto);
-    if (!validarProduto(p, idProduto)) {
-        printf("Produto não encontrado!\n");
+    
+    // Verifica se o produto existe
+    if (!produtoExiste(p, idProduto)) {
+        printf("\nProduto não encontrado!\n");
         return;
     }
     
-    // Solicitar quantidade
     printf("Quantidade: ");
     scanf("%d", &quantidade);
+    
+    // Verifica se há estoque suficiente
     if (!verificarEstoque(p, idProduto, quantidade)) {
-        printf("Estoque insuficiente!\n");
+        printf("\nEstoque insuficiente!\n");
         return;
     }
     
-    // Calcular valor total
-    float valorTotal = calcularValorTotal(p, idProduto, quantidade);
+    // Calcula o valor total da venda
+    float valorUnitario = obterValorProduto(p, idProduto);
+    float valorTotal = valorUnitario * quantidade;
     
-    // Registrar a venda
+    // Registra a venda
     v[*numVendas].idCliente = idCliente;
     v[*numVendas].idProduto = idProduto;
     v[*numVendas].quantProduto = quantidade;
     v[*numVendas].valorTotal = valorTotal;
     
-    // Atualizar estoque
-    atualizarEstoque(p, idProduto, quantidade);
-    
-    // Incrementar contador de vendas
+    // Atualiza o número de vendas realizadas
     (*numVendas)++;
     
-    printf("Venda realizada com sucesso! Valor Total: %.2f\n", valorTotal);
-}
-
-// Função para calcular o valor total de uma venda
-float calcularValorTotal(Produto p[], int idProduto, int quantidade) {
-    for(int i=0; i < TAMProd; i++) {
-        if(p[i].id == idProduto) {
-            return p[i].valor * quantidade;
-        }
-    }
-    return 0.0;
-}
-
-// Função para consultar todas as vendas
-void consultarVenda(Venda v[], int numVendas) {
-    printf("\n==== Consulta de Vendas ====\n");
+    // Atualiza o estoque
+    atualizarEstoque(p, idProduto, quantidade);
     
+    printf("\nVenda realizada com sucesso!");
+    printf("\nValor total: R$ %.2f\n", valorTotal);
+}
+
+void consultarVendas(Venda v[], int numVendas) {
     if (numVendas == 0) {
-        printf("Nenhuma venda registrada!\n");
+        printf("\nNenhuma venda registrada!\n");
         return;
     }
     
+    printf("\n--- Vendas Realizadas ---\n");
     for (int i = 0; i < numVendas; i++) {
         printf("\nVenda %d:", i+1);
         printf("\nID Cliente: %d", v[i].idCliente);

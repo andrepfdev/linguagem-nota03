@@ -5,9 +5,7 @@
 #include "cliente.h"
 #include "produto.h"
 
-// Protótipos das funções relacionadas a vendas
-void realizarVenda(Venda v[], Cliente c[], Produto p[], int *numVendas);
-void consultarVenda(Venda v[], int numVendas);
-float calcularValorTotal(Produto p[], int idProduto, int quantidade);
+void realizarVenda(Venda v[], int *numVendas, Cliente c[], Produto p[]);
+void consultarVendas(Venda v[], int numVendas);
 
 #endif

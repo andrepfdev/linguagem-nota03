@@ -5,8 +5,9 @@
 
 void cadastrarProduto(Produto p[]);
 void consultarProduto(Produto p[]);
-// int validarProduto(Produto p[], int id);
-// int verificarEstoque(Produto p[], int id, int quantidade);
-// void atualizarEstoque(Produto p[], int id, int quantidade);
+int produtoExiste(Produto p[], int id);
+int verificarEstoque(Produto p[], int id, int quantidade);
+void atualizarEstoque(Produto p[], int id, int quantidade);
+float obterValorProduto(Produto p[], int id);
 
 #endif

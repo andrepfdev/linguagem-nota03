@@ -1,21 +1,24 @@
 #include <stdio.h>
 #include "produto.h"
-#include "estruturas.h"
 
-void cadastrarProduto(Produto p[]) {
-    for(int i=0; i < TAMProd; i++) {
-        printf("\nPrimeiro Nome do Produto %d: ", i+1);
+void cadastrarProduto(Produto p[])
+{
+    for (int i = 0; i < TAMProd; i++)
+    {
+        printf("\nPrimeiro Nome do Produto %d: ", i + 1);
         scanf("%s", p[i].nome);
         printf("Quantidade: ");
         scanf("%d", &p[i].quantidade);
         printf("Valor: ");
         scanf("%f", &p[i].valor);
-        p[i].id = i+1;
+        p[i].id = i + 1;
     }
 }
 
-void consultarProduto(Produto p[]) {
-    for(int i=0; i < TAMProd; i++) {
+void consultarProduto(Produto p[])
+{
+    for (int i = 0; i < TAMProd; i++)
+    {
         printf("\nId Produto: %d.", p[i].id);
         printf("\nNome Produto: %s.", p[i].nome);
         printf("\nQuantidade: %d.", p[i].quantidade);
@@ -25,32 +28,54 @@ void consultarProduto(Produto p[]) {
     printf("\n\n");
 }
 
-// Função para validar se um produto existe
-// int validarProduto(Produto p[], int id) {
-//     for(int i=0; i < TAMProd; i++) {
-//         if(p[i].id == id) {
-//             return 1; // Produto existe
-//         }
-//     }
-//     return 0; // Produto não existe
-// }
+int produtoExiste(Produto p[], int id)
+{
+    // Verifica se o produto com o ID fornecido existe
+    for (int i = 0; i < TAMProd; i++)
+    {
+        if (p[i].id == id)
+        {
+            return 1; // Produto existe
+        }
+    }
+    return 0; // Produto não existe
+}
 
-// // Função para verificar se há estoque suficiente
-// int verificarEstoque(Produto p[], int id, int quantidade) {
-//     for(int i=0; i < TAMProd; i++) {
-//         if(p[i].id == id) {
-//             return (p[i].quantidade >= quantidade); // Retorna 1 se houver estoque suficiente
-//         }
-//     }
-//     return 0; // Retorna 0 se não houver estoque ou produto não encontrado
-// }
+int verificarEstoque(Produto p[], int id, int quantidade)
+{
+    // Verifica se há estoque suficiente para o produto
+    for (int i = 0; i < TAMProd; i++)
+    {
+        if (p[i].id == id)
+        {
+            return (p[i].quantidade >= quantidade);
+        }
+    }
+    return 0; // Produto não encontrado
+}
 
-// // Função para atualizar o estoque após uma venda
-// void atualizarEstoque(Produto p[], int id, int quantidade) {
-//     for(int i=0; i < TAMProd; i++) {
-//         if(p[i].id == id) {
-//             p[i].quantidade -= quantidade;
-//             break;
-//         }
-//     }
-// }
+void atualizarEstoque(Produto p[], int id, int quantidade)
+{
+    // Atualiza o estoque após uma venda
+    for (int i = 0; i < TAMProd; i++)
+    {
+        if (p[i].id == id)
+        {
+            p[i].quantidade -= quantidade;
+            break;
+        }
+    }
+}
+
+float obterValorProduto(Produto p[], int id)
+{
+    // Retorna o valor do produto com o ID fornecido
+    for (int i = 0; i < TAMProd; i++)
+    {
+        if (p[i].id == id)
+        {
+            return p[i].valor;
+        }
+    }
+    return 0.0; // Produto não encontrado
+}
