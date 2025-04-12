@@ -6,7 +6,7 @@ void realizarVenda(Venda v[], int *numVendas, Cliente c[], Produto p[]) {
     
     // Verifica se atingiu o limite de vendas
     if (*numVendas >= TAMVenda) {
-        printf("\nLimite de vendas atingido!\n");
+        printf("\nLimite de vendas atingido! :(\n");
         return;
     }
     
