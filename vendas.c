@@ -72,7 +72,7 @@ void consultarVendas(Venda v[], int numVendas) {
         printf("\nID Produto: %d", v[i].idProduto);
         printf("\nQuantidade: %d", v[i].quantProduto);
         printf("\nValor Total: R$ %.2f", v[i].valorTotal);
-        printf("\n----------------------------------");
+        printf("\n------------------------------------");
     }
     printf("\n\n");
 }
